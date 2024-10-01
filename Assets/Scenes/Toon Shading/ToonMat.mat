@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ToonMat
-  m_Shader: {fileID: -6465566751694194690, guid: fdae76db8556c4e899d3203a5f6ec32b,
+  m_Shader: {fileID: -6465566751694194690, guid: ec396cee0722f42058f7f2b757d20387,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -90,6 +90,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -121,16 +125,21 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _LightProbeContribution: 3.5
+    - _LightProbeContribution: 3.28
+    - _Max: 1
     - _Metallic: 0
+    - _Min: 0.3
     - _OcclusionStrength: 1
-    - _OutlineDepthSensitivity: 0.437
-    - _OutlineNormalsSensitivity: 0.758
-    - _OutlineThickness: 5.13
+    - _OutlineDepthSensitivity: 0.026
+    - _OutlineNormalsSensitivity: 0.249
+    - _OutlineThickness: 4.18
+    - _Outline_Strength: 6.2
+    - _Outline_Thickness: 0.1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Shades: 3
     - _Smoothness: 0.808
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -145,6 +154,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Outline_Color: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
