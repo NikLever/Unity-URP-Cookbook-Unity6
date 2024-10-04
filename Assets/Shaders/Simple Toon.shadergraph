@@ -231,6 +231,7 @@
     "m_OutputNode": {
         "m_Id": ""
     },
+    "m_SubDatas": [],
     "m_ActiveTargets": [
         {
             "m_Id": "28f28c754bb444ffa62c59098ca2ffbf"
@@ -509,6 +510,9 @@
     "m_AlphaClip": false,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
+    "m_DisableTint": false,
+    "m_AdditionalMotionVectorMode": 0,
+    "m_AlembicMotionVectors": false,
     "m_SupportsLODCrossFade": false,
     "m_CustomEditorGUI": "",
     "m_SupportVFX": false
@@ -1458,15 +1462,15 @@
     "m_Value": {
         "serializedVersion": "2",
         "key0": {
-            "r": 0.6037735939025879,
-            "g": 0.6037735939025879,
-            "b": 0.6037735939025879,
+            "r": 0.09433960914611817,
+            "g": 0.09122462570667267,
+            "b": 0.09122462570667267,
             "a": 1.0
         },
         "key1": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0,
+            "r": 0.6037735939025879,
+            "g": 0.6037735939025879,
+            "b": 0.6037735939025879,
             "a": 1.0
         },
         "key2": {
@@ -1505,15 +1509,15 @@
             "b": 0.0,
             "a": 0.0
         },
-        "ctime0": 30069,
-        "ctime1": 65535,
+        "ctime0": 7710,
+        "ctime1": 42983,
         "ctime2": 65535,
         "ctime3": 0,
         "ctime4": 0,
         "ctime5": 0,
         "ctime6": 0,
         "ctime7": 0,
-        "atime0": 0,
+        "atime0": 8288,
         "atime1": 65535,
         "atime2": 0,
         "atime3": 0,
@@ -1523,7 +1527,7 @@
         "atime7": 0,
         "m_Mode": 1,
         "m_ColorSpace": -1,
-        "m_NumColorKeys": 2,
+        "m_NumColorKeys": 3,
         "m_NumAlphaKeys": 2
     },
     "m_DefaultValue": {
