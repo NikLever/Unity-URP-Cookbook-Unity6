@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SimpleToonMat
-  m_Shader: {fileID: -6465566751694194690, guid: dbf0c45f822e74a5fb0883a154fdf30a,
+  m_Shader: {fileID: -6465566751694194690, guid: ec396cee0722f42058f7f2b757d20387,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -70,7 +70,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture:
-        m_Texture: {fileID: 2800000, guid: 4bc08b8884ed94e7a8194c0582614dfc, type: 3}
+        m_Texture: {fileID: 2800000, guid: d2ef35b4adb5847caba90e25acb7bef3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:

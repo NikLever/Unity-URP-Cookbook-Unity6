@@ -123,13 +123,13 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.4472136
     - _GlossyReflections: 1
-    - _LightProbeContribution: 3.5
+    - _LightProbeContribution: 2.61
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineDepthSensitivity: 0.903
-    - _OutlineNormalsSensitivity: 0.38
-    - _OutlineThickness: 2
+    - _OutlineDepthSensitivity: 0.457
+    - _OutlineNormalsSensitivity: 0.559
+    - _OutlineThickness: 1
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0

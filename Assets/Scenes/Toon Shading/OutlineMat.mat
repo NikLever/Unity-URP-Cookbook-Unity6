@@ -46,12 +46,13 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _CastShadows: 1
-    - _ColorThreshold: 3.19
+    - _ColorThreshold: 3.26
     - _Cull: 2
     - _DstBlend: 0
     - _Fullscreen_DepthWrite: 0
     - _NormalThreshold: 0.64
     - _OVERLAY: 1
+    - _Outline_Thickness: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 1

@@ -8,8 +8,8 @@ TEXTURE2D(_CameraDepthTexture);
 SAMPLER(sampler_CameraDepthTexture);
 float4 _CameraDepthTexture_TexelSize;
 
-TEXTURE2D(_CameraDepthNormalsTexture);
-SAMPLER(sampler_CameraDepthNormalsTexture);
+TEXTURE2D(_CameraNormalsTexture);
+SAMPLER(sampler_CameraNormalsTexture);
  
 float3 DecodeNormal(float4 enc)
 {
@@ -39,7 +39,7 @@ void OutlineObject_float(float2 UV, float OutlineThickness, float DepthSensitivi
     for(int i = 0; i < 4 ; i++)
     {
         depthSamples[i] = SAMPLE_TEXTURE2D(_CameraDepthTexture, sampler_CameraDepthTexture, uvSamples[i]).r;
-        normalSamples[i] = DecodeNormal(SAMPLE_TEXTURE2D(_CameraDepthNormalsTexture, sampler_CameraDepthNormalsTexture, uvSamples[i]));
+        normalSamples[i] = DecodeNormal(SAMPLE_TEXTURE2D(_CameraNormalsTexture, sampler_CameraNormalsTexture, uvSamples[i]));
     }
 
     // Depth
