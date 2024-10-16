@@ -51,13 +51,14 @@
             {
                 Varyings OUT;
 
+                Particle particle = particleBuffer[IN.instanceID];
+
                 // Color
-			    float life = particleBuffer[IN.instanceID].life;
-			    float lerpVal = life * 0.25f;
+			    float lerpVal = particle.life * 0.25f;
 			    OUT.color = half4(1.0f - lerpVal+0.1, lerpVal+0.1, 1.0f, lerpVal);
 
 			    // Position
-                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                OUT.positionHCS = TransformObjectToHClip(particle.position);
 
                 OUT.size = _PointSize;
 
