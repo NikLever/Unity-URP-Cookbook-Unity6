@@ -44,14 +44,14 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 0.1
-    - _IOR: 1.5
-    - _NormalStrength: 0.025
+    - _IOR: 1.36
+    - _NormalStrength: 0.073
     - _Opacity: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0.546
+    - _Smoothness: 0
     m_Colors:
-    - _Color: {r: 0, g: 0.4683975, b: 0.8113207, a: 0}
+    - _Color: {r: 0.2232111, g: 0.3897064, b: 0.8301887, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &7479383210056074826
