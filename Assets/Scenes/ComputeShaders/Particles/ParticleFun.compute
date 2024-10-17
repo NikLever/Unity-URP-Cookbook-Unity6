@@ -32,10 +32,10 @@ void respawn(uint id)
 	float tmp = (1.0 / 4294967296.0);
 	float f0 = float(rand_xorshift()) * tmp - 0.5;
 	float f1 = float(rand_xorshift()) * tmp - 0.5;
-	float f2 = float(rand_xorshift()) * tmp - 0.5;
-	float3 normalF3 = normalize(float3(f0, f1, f2)) * 0.8f;
+	//float f2 = float(rand_xorshift()) * tmp - 0.5;
+	float3 normalF3 = normalize(float3(f0, f1, 0.0)) * 0.8f;
 	normalF3 *= float(rand_xorshift()) * tmp;
-	particleBuffer[id].position = float3(normalF3.x + mousePosition.x, normalF3.y + mousePosition.y, normalF3.z + 3.0);
+	particleBuffer[id].position = float3(normalF3.x + mousePosition.x, normalF3.y + mousePosition.y, 0.0);
 	// reset the life of this particle
 	particleBuffer[id].life = 4;
 	particleBuffer[id].velocity = float3(0,0,0);
@@ -48,7 +48,7 @@ void CSParticle(uint3 id : SV_DispatchThreadID)
 	// subtract the life based on deltaTime
 	particle.life -= deltaTime;
 
-	float3 delta = float3(mousePosition.xy, 3) - particle.position;
+	float3 delta = float3(mousePosition.xy, 0) - particle.position;
 	float3 dir = normalize(delta);
 
 	particle.velocity += dir;

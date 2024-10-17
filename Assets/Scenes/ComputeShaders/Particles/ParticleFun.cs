@@ -45,13 +45,11 @@ public class ParticleFun : MonoBehaviour
             float z = Random.value * 2 - 1.0f;
             Vector3 xyz = new Vector3(x, y, z);
             xyz.Normalize();
-            xyz *= Random.value;
-            xyz *= 0.5f;
-
+            xyz *= Random.value * 5;
 
             particleArray[i].position.x = xyz.x;
             particleArray[i].position.y = xyz.y;
-            particleArray[i].position.z = xyz.z + 3;
+            particleArray[i].position.z = xyz.z;
 
             particleArray[i].velocity.x = 0;
             particleArray[i].velocity.y = 0;
