@@ -13,11 +13,45 @@
 float3 _LightDirection;
 float3 _LightPosition;
 
+struct Boid
+{
+    float3 position; 
+    float3 direction; 
+    float noise_offset;
+};
+
+StructuredBuffer<Boid> boidsBuffer;
+
+float4x4 look_at_matrix(float3 dir, float3 up) {
+    float3 zaxis = normalize(dir);
+    float3 xaxis = normalize(cross(up, zaxis));
+    float3 yaxis = cross(zaxis, xaxis);
+    return float4x4(
+        xaxis.x, yaxis.x, zaxis.x, 0,
+        xaxis.y, yaxis.y, zaxis.y, 0,
+        xaxis.z, yaxis.z, zaxis.z, 0,
+        0, 0, 0, 1
+    );
+}
+
+float4x4 create_matrix(float3 pos, float3 dir, float3 up) {
+    float3 zaxis = normalize(dir);
+    float3 xaxis = normalize(cross(up, zaxis));
+    float3 yaxis = cross(zaxis, xaxis);
+    return float4x4(
+        xaxis.x, yaxis.x, zaxis.x, pos.x,
+        xaxis.y, yaxis.y, zaxis.y, pos.y,
+        xaxis.z, yaxis.z, zaxis.z, pos.z,
+        0, 0, 0, 1
+    );
+}
+
 struct Attributes
 {
     float4 positionOS   : POSITION;
     float3 normalOS     : NORMAL;
     float2 texcoord     : TEXCOORD0;
+    uint instanceID : SV_InstanceID;
     UNITY_VERTEX_INPUT_INSTANCE_ID
 };
 
@@ -32,8 +66,12 @@ struct Varyings
 
 float4 GetShadowPositionHClip(Attributes input)
 {
-    float3 positionWS = TransformObjectToWorld(input.positionOS.xyz);
-    float3 normalWS = TransformObjectToWorldNormal(input.normalOS);
+    Boid boid = boidsBuffer[input.instanceID];
+
+    float4x4 mat = create_matrix(boid.position, boid.direction, float3(0.0, 1.0, 0.0));
+
+    float3 positionWS = TransformObjectToWorld(mul(mat, input.positionOS).xyz);
+    float3 normalWS = TransformObjectToWorldNormal(mul(mat, input.normalOS));
 
 #if _CASTING_PUNCTUAL_LIGHT_SHADOW
     float3 lightDirectionWS = normalize(_LightPosition - positionWS);

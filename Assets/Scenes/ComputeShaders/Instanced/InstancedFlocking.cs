@@ -36,12 +36,11 @@ public class InstancedFlocking : MonoBehaviour
 
     int kernelHandle;
     ComputeBuffer boidsBuffer;
-    ComputeBuffer argsBuffer;
-    uint[] args = new uint[5] { 0, 0, 0, 0, 0 };
     Boid[] boidsArray;
     int groupSizeX;
     int numOfBoids;
-    Bounds bounds;
+    RenderParams renderParams;
+    GraphicsBuffer argsBuffer;
 
     void Start()
     {
@@ -52,10 +51,11 @@ public class InstancedFlocking : MonoBehaviour
         groupSizeX = Mathf.CeilToInt((float)boidsCount / (float)x);
         numOfBoids = groupSizeX * (int)x;
 
-        bounds = new Bounds(Vector3.zero, Vector3.one * 1000);
-
         InitBoids();
         InitShader();
+
+        renderParams = new RenderParams(boidMaterial);
+        renderParams.worldBounds = new Bounds(Vector3.zero, Vector3.one * 1000);
     }
 
     private void InitBoids()
@@ -76,13 +76,11 @@ public class InstancedFlocking : MonoBehaviour
         boidsBuffer = new ComputeBuffer(numOfBoids, 7 * sizeof(float));
         boidsBuffer.SetData(boidsArray);
 
-        argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
-        if (boidMesh != null)
-        {
-            args[0] = (uint)boidMesh.GetIndexCount(0);
-            args[1] = (uint)numOfBoids;
-        }
-        argsBuffer.SetData(args);
+        argsBuffer = new GraphicsBuffer(GraphicsBuffer.Target.IndirectArguments, 1, GraphicsBuffer.IndirectDrawIndexedArgs.size);
+        GraphicsBuffer.IndirectDrawIndexedArgs[] data = new GraphicsBuffer.IndirectDrawIndexedArgs[1];
+        data[0].indexCountPerInstance = boidMesh.GetIndexCount(0);
+        data[0].instanceCount = (uint)numOfBoids;
+        argsBuffer.SetData(data);
 
         shader.SetBuffer(this.kernelHandle, "boidsBuffer", boidsBuffer);
         shader.SetFloat("rotationSpeed", rotationSpeed);
@@ -102,7 +100,7 @@ public class InstancedFlocking : MonoBehaviour
 
         shader.Dispatch(this.kernelHandle, groupSizeX, 1, 1);
 
-        Graphics.DrawMeshInstancedIndirect(boidMesh, 0, boidMaterial, bounds, argsBuffer);
+        Graphics.RenderMeshIndirect( renderParams, boidMesh, argsBuffer );
     }
 
     void OnDestroy()

@@ -50,13 +50,11 @@ public class SkinnedFlocking : MonoBehaviour {
     private ComputeBuffer boidsBuffer;
     private ComputeBuffer vertexAnimationBuffer;
     public Material boidMaterial;
-    ComputeBuffer argsBuffer;
-    MaterialPropertyBlock props;
-    uint[] args = new uint[5] { 0, 0, 0, 0, 0 };
     Boid[] boidsArray;
     int groupSizeX;
     int numOfBoids;
-    Bounds bounds;
+    RenderParams renderParams;
+    GraphicsBuffer argsBuffer;
 
     void Start()
     {
@@ -67,15 +65,12 @@ public class SkinnedFlocking : MonoBehaviour {
         groupSizeX = Mathf.CeilToInt((float)boidsCount / (float)x);
         numOfBoids = groupSizeX * (int)x;
 
-        bounds = new Bounds(Vector3.zero, Vector3.one * 1000);
-
-        // This property block is used only for avoiding an instancing bug.
-        props = new MaterialPropertyBlock();
-        props.SetFloat("_UniqueID", Random.value);
-
         InitBoids();
         GenerateSkinnedAnimationForGPUBuffer();
         InitShader();
+
+        renderParams = new RenderParams(boidMaterial);
+        renderParams.worldBounds = new Bounds(Vector3.zero, Vector3.one * 1000);
     }
 
     void InitBoids()
@@ -95,16 +90,11 @@ public class SkinnedFlocking : MonoBehaviour {
     void InitShader()
     {
         // Initialize the indirect draw args buffer.
-        argsBuffer = new ComputeBuffer(
-            1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments
-        );
-
-        if (boidMesh)//Set by the GenerateSkinnedAnimationForGPUBuffer
-        {
-            args[0] = boidMesh.GetIndexCount(0);
-            args[1] = (uint)numOfBoids;
-            argsBuffer.SetData(args);
-        }
+        argsBuffer = new GraphicsBuffer(GraphicsBuffer.Target.IndirectArguments, 1, GraphicsBuffer.IndirectDrawIndexedArgs.size);
+        GraphicsBuffer.IndirectDrawIndexedArgs[] data = new GraphicsBuffer.IndirectDrawIndexedArgs[1];
+        data[0].indexCountPerInstance = boidMesh.GetIndexCount(0);
+        data[0].instanceCount = (uint)numOfBoids;
+        argsBuffer.SetData(data);
 
         boidsBuffer = new ComputeBuffer(numOfBoids, 12 * sizeof(float));
         boidsBuffer.SetData(boidsArray);
@@ -135,7 +125,7 @@ public class SkinnedFlocking : MonoBehaviour {
 
         shader.Dispatch(kernelHandle, groupSizeX, 1, 1);
 
-        Graphics.DrawMeshInstancedIndirect( boidMesh, 0, boidMaterial, bounds, argsBuffer, 0, props);
+        Graphics.RenderMeshIndirect( renderParams, boidMesh, argsBuffer );
     }
 
     void OnDestroy()

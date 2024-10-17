@@ -169,7 +169,7 @@ Shader "Custom/Flocking/Instanced"
             #pragma instancing_options renderinglayer
             #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
 
-            #include "./LitInput.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/Shaders//LitInput.hlsl"
             #include "./LitForwardPass.hlsl"
             ENDHLSL
         }
@@ -219,7 +219,7 @@ Shader "Custom/Flocking/Instanced"
 
             // -------------------------------------
             // Includes
-            #include "./LitInput.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/Shaders//LitInput.hlsl"
             #include "./ShadowCasterPass.hlsl"
             ENDHLSL
         }
