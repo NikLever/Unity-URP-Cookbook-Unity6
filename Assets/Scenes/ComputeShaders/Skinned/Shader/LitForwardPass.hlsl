@@ -29,18 +29,6 @@ StructuredBuffer<Boid> boidsBuffer;
 StructuredBuffer<float4> vertexAnimation; 
 int numOfFrames;
 
-float4x4 look_at_matrix(float3 dir, float3 up) {
-    float3 zaxis = normalize(dir);
-    float3 xaxis = normalize(cross(up, zaxis));
-    float3 yaxis = cross(zaxis, xaxis);
-    return float4x4(
-        xaxis.x, yaxis.x, zaxis.x, 0,
-        xaxis.y, yaxis.y, zaxis.y, 0,
-        xaxis.z, yaxis.z, zaxis.z, 0,
-        0, 0, 0, 1
-    );
-}
-
 float4x4 create_matrix(float3 pos, float3 dir, float3 up) {
     float3 zaxis = normalize(dir);
     float3 xaxis = normalize(cross(up, zaxis));

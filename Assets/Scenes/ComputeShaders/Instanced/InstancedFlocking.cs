@@ -82,13 +82,13 @@ public class InstancedFlocking : MonoBehaviour
         data[0].instanceCount = (uint)numOfBoids;
         argsBuffer.SetData(data);
 
-        shader.SetBuffer(this.kernelHandle, "boidsBuffer", boidsBuffer);
         shader.SetFloat("rotationSpeed", rotationSpeed);
         shader.SetFloat("boidSpeed", boidSpeed);
         shader.SetFloat("boidSpeedVariation", boidSpeedVariation);
         shader.SetVector("flockPosition", target.transform.position);
         shader.SetFloat("neighbourDistance", neighbourDistance);
         shader.SetInt("boidsCount", numOfBoids);
+        shader.SetBuffer(this.kernelHandle, "boidsBuffer", boidsBuffer);
 
         boidMaterial.SetBuffer("boidsBuffer", boidsBuffer);
     }
