@@ -14,15 +14,17 @@ using UnityEngine.Rendering.RenderGraphModule.Util;
 // This allows you to write more decoupled passes without the added costs of avoidable copies/blits.
 public class BlitWithMaterialPass : ScriptableRenderPass
 {
-    const string m_PassName = "BliWithMaterialPass";
+    const string m_PassName = "BlitWithMaterialPass";
 
     // Material used in the blit operation.
     Material m_BlitMaterial;
+    public string passNameUsed = "";
 
     // Function used to transfer the material from the renderer feature to the render pass.
-    public void Setup(Material mat)
+    public void Setup(Material mat, string passName = null )
     {
         m_BlitMaterial = mat;
+        passNameUsed = passName;
 
         //The pass will read the current color texture. That needs to be an intermediate texture. It's not supported to use the BackBuffer as input texture. 
         //By setting this property, URP will automatically create an intermediate texture. 
@@ -40,22 +42,23 @@ public class BlitWithMaterialPass : ScriptableRenderPass
         //Unless you set the render event to AfterRendering, where we only have the BackBuffer. 
         if (resourceData.isActiveTargetBackBuffer)
         {
-            Debug.LogError($"Skipping render pass. BlitWithMaterialRendererFeature requires an intermediate ColorTexture, we can't use the BackBuffer as a texture input.");
+            Debug.LogWarning($"Skipping render pass. BlitWithMaterialRendererFeature requires an intermediate ColorTexture, we can't use the BackBuffer as a texture input.");
             return;
         }
 
+        string passName = ( passNameUsed == "" ) ? m_PassName : passNameUsed;
         // The destination texture is created here, 
         // the texture is created with the same dimensions as the active color texture
         var source = resourceData.activeColorTexture;
 
         var destinationDesc = renderGraph.GetTextureDesc(source);
-        destinationDesc.name = $"CameraColor-{m_PassName}";
+        destinationDesc.name = $"CameraColor-{passName}";
         destinationDesc.clearBuffer = false;
 
         TextureHandle destination = renderGraph.CreateTexture(destinationDesc);
 
         RenderGraphUtils.BlitMaterialParameters para = new(source, destination, m_BlitMaterial, 0);
-        renderGraph.AddBlitPass(para, passName: m_PassName);
+        renderGraph.AddBlitPass(para, passName: passName);
 
         //FrameData allows to get and set internal pipeline buffers. Here we update the CameraColorBuffer to the texture that we just wrote to in this pass. 
         //Because RenderGraph manages the pipeline resources and dependencies, following up passes will correctly use the right color buffer.
@@ -69,6 +72,7 @@ public class BlitWithMaterialRendererFeature : ScriptableRendererFeature
 {    
     [Tooltip("The material used when making the blit operation.")]
     public Material material;
+    public string passName = "";
 
     [Tooltip("The event where to inject the pass.")]
     public RenderPassEvent renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing;
@@ -100,7 +104,7 @@ public class BlitWithMaterialRendererFeature : ScriptableRendererFeature
             return;
         }
 
-        m_Pass.Setup(material);
+        m_Pass.Setup(material, passName);
         renderer.EnqueuePass(m_Pass);        
     }
 }
