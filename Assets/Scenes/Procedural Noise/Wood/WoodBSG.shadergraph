@@ -1021,6 +1021,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "wood",
     "m_FunctionSource": "fc77b28ff93be4065a6231f56bb9d325",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
