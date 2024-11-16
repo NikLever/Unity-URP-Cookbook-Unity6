@@ -25,6 +25,8 @@ public class ParticleFun : MonoBehaviour
     ComputeBuffer particleBuffer;
 
     int groupSizeX; 
+
+    RenderParams rp;
     
     
     // Use this for initialization
@@ -74,12 +76,10 @@ public class ParticleFun : MonoBehaviour
         // bind the compute buffer to the shader and the compute shader
         shader.SetBuffer(kernelID, "particleBuffer", particleBuffer);
         material.SetBuffer("particleBuffer", particleBuffer);
-    }
 
-    void OnRenderObject()
-    {
-        material.SetPass(0);
-        Graphics.DrawProceduralNow(MeshTopology.Points, 1, particleCount);
+        rp = new RenderParams(material);
+        rp.worldBounds = new Bounds(Vector3.zero, 10000*Vector3.one); 
+
     }
 
     void OnDestroy()
@@ -94,12 +94,14 @@ public class ParticleFun : MonoBehaviour
 
         float[] mousePosition2D = { cursorPos.x, cursorPos.y };
 
-        // Send datas to the compute shader
+        // Send data to the compute shader
         shader.SetFloat("deltaTime", Time.deltaTime);
         shader.SetFloats("mousePosition", mousePosition2D);
 
         // Update the Particles
         shader.Dispatch(kernelID, groupSizeX, 1, 1);
+
+        Graphics.RenderPrimitives(rp, MeshTopology.Points, 1, particleCount );
     }
 
     void OnGUI()
