@@ -376,7 +376,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -1131,7 +1131,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "isMainTexture": false,
@@ -1194,8 +1194,8 @@
     "m_ObjectId": "b0607d2cd7894d618451e8451bff0ad2",
     "m_Title": "Main Light colour",
     "m_Position": {
-        "x": -680.5944213867188,
-        "y": 85.86708068847656
+        "x": -680.5,
+        "y": 86.00003051757813
     }
 }
 
@@ -1205,8 +1205,8 @@
     "m_ObjectId": "b409959dcda44b53b1a68f1c161e9f00",
     "m_Title": "Main light ramping",
     "m_Position": {
-        "x": -1146.26123046875,
-        "y": 282.393310546875
+        "x": -1146.5,
+        "y": 282.5000305175781
     }
 }
 
