@@ -2156,7 +2156,7 @@
     "m_Title": "Detect edges based on colors",
     "m_Position": {
         "x": -1657.0,
-        "y": 1744.4998779296875
+        "y": 1744.5001220703125
     }
 }
 
@@ -3965,7 +3965,7 @@
     "m_Title": "Detect edges based on world-space normals",
     "m_Position": {
         "x": -1672.5,
-        "y": 932.9999389648438
+        "y": 933.0
     }
 }
 

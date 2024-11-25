@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -421,7 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eaaec5ff5e524ce1a88e0713f1f8d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  depth: 20
+  depth: 17
   scale: 20
 --- !u!154 &1548626071
 TerrainCollider:

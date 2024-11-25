@@ -116,7 +116,7 @@ public class ParticleFun : MonoBehaviour
         mousePos.x = e.mousePosition.x;
         mousePos.y = c.pixelHeight - e.mousePosition.y;
 
-        p = c.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, c.nearClipPlane + 14));// z = 3.
+        p = c.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, c.nearClipPlane));
 
         cursorPos.x = p.x;
         cursorPos.y = p.y;    
