@@ -8,7 +8,6 @@ public class SkinnedFlocking : MonoBehaviour {
         public Vector3 position;
         public Vector3 direction;
         public float noise_offset;
-        public float speed;
         public float frame;
         public Vector3 padding;
 
@@ -21,7 +20,7 @@ public class SkinnedFlocking : MonoBehaviour {
             direction.y = dir.y;
             direction.z = dir.z;
             noise_offset = offset;
-            speed = frame = 0;
+            frame = 0;
             padding.x = 0; padding.y = padding.z = 0;
         }
     }
@@ -96,7 +95,7 @@ public class SkinnedFlocking : MonoBehaviour {
         data[0].instanceCount = (uint)numOfBoids;
         argsBuffer.SetData(data);
 
-        boidsBuffer = new ComputeBuffer(numOfBoids, 12 * sizeof(float));
+        boidsBuffer = new ComputeBuffer(numOfBoids, 11 * sizeof(float));
         boidsBuffer.SetData(boidsArray);
 
         shader.SetFloat("rotationSpeed", rotationSpeed);

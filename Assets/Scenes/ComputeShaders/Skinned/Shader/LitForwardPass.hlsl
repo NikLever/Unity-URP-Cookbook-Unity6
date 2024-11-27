@@ -20,7 +20,6 @@ struct Boid
     float3 position; 
     float3 direction; 
     float noise_offset;
-    float speed;
     float frame;
     float3 padding;
 };
